@@ -1,6 +1,7 @@
 package io.github.jwdeveloper.spigot.commands.impl;
 
 import io.github.jwdeveloper.commands.api.exceptions.PatternException;
+import io.github.jwdeveloper.spigot.commands.impl.common.CommandsTestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

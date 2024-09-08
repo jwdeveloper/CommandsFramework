@@ -4,7 +4,7 @@ import io.github.jwdeveloper.commands.api.data.events.CommandEventImpl;
 import io.github.jwdeveloper.commands.api.data.expressions.CommandNode;
 import io.github.jwdeveloper.commands.core.impl.services.CommandEventsImpl;
 import io.github.jwdeveloper.commands.api.Commands;
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
+import io.github.jwdeveloper.spigot.commands.impl.common.CommandsTestBase;
 import io.github.jwdeveloper.spigot.commands.impl.common.SenderType1;
 import io.github.jwdeveloper.spigot.commands.impl.common.SenderType1SubType;
 import io.github.jwdeveloper.spigot.commands.impl.common.SenderType2;

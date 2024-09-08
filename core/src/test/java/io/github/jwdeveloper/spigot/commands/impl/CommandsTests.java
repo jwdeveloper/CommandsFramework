@@ -1,6 +1,6 @@
 package io.github.jwdeveloper.spigot.commands.impl;
 
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
+import io.github.jwdeveloper.spigot.commands.impl.common.CommandsTestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

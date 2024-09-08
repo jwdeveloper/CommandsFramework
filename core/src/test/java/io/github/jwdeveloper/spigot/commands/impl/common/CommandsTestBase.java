@@ -1,4 +1,4 @@
-package io.github.jwdeveloper.spigot.commands.impl;
+package io.github.jwdeveloper.spigot.commands.impl.common;
 
 
 import io.github.jwdeveloper.commands.api.data.events.CommandEvent;

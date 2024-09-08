@@ -1,13 +1,8 @@
 package io.github.jwdeveloper.spigot.commands.impl;
 
-import io.github.jwdeveloper.commands.core.impl.data.Ref;
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
+import io.github.jwdeveloper.spigot.commands.impl.common.CommandsTestBase;
 
-import io.github.jwdeveloper.commands.api.data.ActionResult;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-public class GlobalEventsTests extends CommandsTestBase {
+public class ActionsTests extends CommandsTestBase {
 
 
    /* @Test

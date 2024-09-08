@@ -1,7 +1,7 @@
 package io.github.jwdeveloper.spigot.commands.impl.arguments;
 
 import io.github.jwdeveloper.commands.api.data.DisplayAttribute;
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
+import io.github.jwdeveloper.spigot.commands.impl.common.CommandsTestBase;
 import io.github.jwdeveloper.spigot.commands.impl.common.ExampleEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

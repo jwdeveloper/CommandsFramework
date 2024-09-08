@@ -2,7 +2,7 @@ package io.github.jwdeveloper.spigot.commands.impl.services;
 
 import io.github.jwdeveloper.commands.core.impl.services.ExpressionService;
 import io.github.jwdeveloper.commands.api.Command;
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
+import io.github.jwdeveloper.spigot.commands.impl.common.CommandsTestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
