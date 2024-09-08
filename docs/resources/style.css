@@ -1,0 +1,27 @@
+:root {
+    --blockquote-padding: 0.7em;
+}
+
+summary {
+    background: var(--code-inline-background);
+    padding: var(--blockquote-padding);
+    border-radius: 0.3em;
+    transition: transform 0.4s ease;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+
+    border: 0.1em solid var(--mono-tint2);
+}
+
+summary:hover {
+    transform: scale(1.1);
+    background: var(--mono-tint2)
+}
+
+.class-name
+{
+ color: var(--code-theme-function);
+}
+
