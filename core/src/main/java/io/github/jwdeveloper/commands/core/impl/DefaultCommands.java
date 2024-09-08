@@ -8,20 +8,19 @@ import io.github.jwdeveloper.commands.api.TemplateParser;
 import io.github.jwdeveloper.commands.api.argumetns.ArgumentsTypesRegistry;
 import io.github.jwdeveloper.commands.api.builders.CommandBuilder;
 import io.github.jwdeveloper.commands.api.services.ActionsRegistry;
-import io.github.jwdeveloper.commands.core.impl.patterns.PatternService;
+import io.github.jwdeveloper.commands.core.impl.patterns.PatternBuilderVisitor;
 import io.github.jwdeveloper.commands.api.patterns.PatternsRegistry;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @Getter
 @Accessors(fluent = true)
 public class DefaultCommands implements Commands {
-    private final PatternService patternService;
+    private final PatternBuilderVisitor patternService;
     private final TemplateParser commandsTemplate;
     private final ActionsRegistry actions;
     private final CommandsRegistry commandsRegistry;
@@ -33,7 +32,7 @@ public class DefaultCommands implements Commands {
                            DependanceContainer container,
                            ArgumentsTypesRegistry argumentTypesRegistry,
                            TemplateParser commandsTemplate,
-                           PatternService patternService,
+                           PatternBuilderVisitor patternService,
                            ActionsRegistry actionsRegistry,
                            PatternsRegistry patterns) {
         this.patterns = patterns;

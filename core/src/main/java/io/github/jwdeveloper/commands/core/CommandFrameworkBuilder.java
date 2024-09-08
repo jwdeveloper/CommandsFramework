@@ -23,8 +23,8 @@ import io.github.jwdeveloper.commands.core.impl.DefaultCommands;
 import io.github.jwdeveloper.commands.core.impl.builders.ArgumentTypeBuilderImpl;
 import io.github.jwdeveloper.commands.core.impl.builders.CommandBuilderImpl;
 import io.github.jwdeveloper.commands.core.impl.patterns.PatternParser;
-import io.github.jwdeveloper.commands.core.impl.patterns.PatternService;
-import io.github.jwdeveloper.commands.core.impl.patterns.PatternsImpl;
+import io.github.jwdeveloper.commands.core.impl.patterns.PatternBuilderVisitor;
+import io.github.jwdeveloper.commands.core.impl.patterns.DefaultPatternsRegistry;
 import io.github.jwdeveloper.commands.core.impl.services.ActionBindingService;
 import io.github.jwdeveloper.commands.core.impl.services.ActionsRegistryImpl;
 import io.github.jwdeveloper.commands.core.impl.services.MessagesServiceImpl;
@@ -39,7 +39,7 @@ public class CommandFrameworkBuilder {
         containerBuilder.registerSingleton(Commands.class, DefaultCommands.class);
         containerBuilder.registerSingleton(CommandsRegistry.class, DefaultCommandsRegistry.class);
         containerBuilder.registerSingleton(ActionsRegistry.class, ActionsRegistryImpl.class);
-        containerBuilder.registerSingleton(PatternsRegistry.class, PatternsImpl.class);
+        containerBuilder.registerSingleton(PatternsRegistry.class, DefaultPatternsRegistry.class);
         containerBuilder.registerSingleton(ArgumentsTypesRegistry.class, DefaultArgumentTypesRegistry.class);
         containerBuilder.registerSingleton(MessagesService.class, MessagesServiceImpl.class);
         containerBuilder.registerSingleton(ValidationService.class, DefaultValidationService.class);
@@ -48,7 +48,7 @@ public class CommandFrameworkBuilder {
         containerBuilder.registerTransient(CommandBuilder.class, CommandBuilderImpl.class);
         containerBuilder.registerTransient(TemplateParser.class, TemplateService.class);
         containerBuilder.registerSingleton(ActionBindingService.class);
-        containerBuilder.registerTransient(PatternService.class);
+        containerBuilder.registerTransient(PatternBuilderVisitor.class);
         containerBuilder.registerSingleton(PatternParser.class);
 
         onDependecines.accept(containerBuilder);
@@ -63,20 +63,20 @@ public class CommandFrameworkBuilder {
 
         var bindingsService = container.find(ActionBindingService.class);
         var patterns = commands.patterns();
-        patterns.mapProperty("dn", (value, argBuilder, s) -> argBuilder.withDisplayName());
-        patterns.mapProperty("dt", (value, argBuilder, s) -> argBuilder.withDisplayType());
-        patterns.mapProperty("dd", (value, argBuilder, s) -> argBuilder.withDisplayDescription());
-        patterns.mapProperty("de", (value, argBuilder, s) -> argBuilder.withDisplayError());
-        patterns.mapProperty("ds", (value, argBuilder, s) -> argBuilder.withDisplaySuggestions());
-        patterns.mapProperty("d-", (value, argBuilder, s) -> argBuilder.withDisplayNone());
-        patterns.mapProperty("da", (value, argBuilder, s) -> argBuilder.withDisplayAttribute(DisplayAttribute.values()));
-        patterns.mapProperty("d", (value, argBuilder, s) -> argBuilder.withDescription(value));
-        patterns.mapProperty("p", (value, argBuilder, source) ->
+        patterns.registerForArgument("dn", (value, argBuilder, s) -> argBuilder.withDisplayName());
+        patterns.registerForArgument("dt", (value, argBuilder, s) -> argBuilder.withDisplayType());
+        patterns.registerForArgument("dd", (value, argBuilder, s) -> argBuilder.withDisplayDescription());
+        patterns.registerForArgument("de", (value, argBuilder, s) -> argBuilder.withDisplayError());
+        patterns.registerForArgument("ds", (value, argBuilder, s) -> argBuilder.withDisplaySuggestions());
+        patterns.registerForArgument("d-", (value, argBuilder, s) -> argBuilder.withDisplayNone());
+        patterns.registerForArgument("da", (value, argBuilder, s) -> argBuilder.withDisplayAttribute(DisplayAttribute.values()));
+        patterns.registerForArgument("d", (value, argBuilder, s) -> argBuilder.withDescription(value));
+        patterns.registerForArgument("p", (value, argBuilder, source) ->
         {
             var parserAction = bindingsService.bindParseMethod(source, value);
             argBuilder.withParser(parserAction);
         });
-        patterns.mapProperty("s", (value, argBuilder, source) ->
+        patterns.registerForArgument("s", (value, argBuilder, source) ->
         {
             var suggestionAction = bindingsService.bindSuggestionsMethod(source, value);
             argBuilder.withSuggestions(suggestionAction);

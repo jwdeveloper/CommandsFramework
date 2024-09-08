@@ -1,5 +1,6 @@
 package io.github.jwdeveloper.spigot.commands.impl.arguments;
 
+import io.github.jwdeveloper.commands.api.data.DisplayAttribute;
 import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
 import io.github.jwdeveloper.spigot.commands.impl.common.ExampleEnum;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 public class ArgumentTypesTests extends CommandsTestBase {
 
 
@@ -15,6 +17,10 @@ public class ArgumentTypesTests extends CommandsTestBase {
     public void custom_argument_should_work() {
         api.argumentTypes()
                 .create("ExampleEnum")
+                .onArgumentBuilder(argumentBuilder ->
+                {
+                    argumentBuilder.withDisplayAttribute(DisplayAttribute.SUGGESTIONS);
+                })
                 .onParse(argumentParseEvent ->
                 {
                     var name = argumentParseEvent.nextArgument();

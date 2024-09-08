@@ -61,6 +61,11 @@ public class ArgumentBuilderImpl implements ArgumentBuilder {
         if (properties.displayAttributes().isEmpty())
             withDisplayAttribute(DisplayAttribute.NAME, DisplayAttribute.TYPE, DisplayAttribute.ERROR);
 
+        if (properties.displayAttributes().contains(DisplayAttribute.NONE)) {
+            properties.displayAttributes().clear();
+            properties.displayAttributes().add(DisplayAttribute.NONE);
+        }
+
         if (properties.defaultValue() == null)
             withDefaultValue(argumentType.defaultValue());
 

@@ -9,7 +9,10 @@ import java.util.List;
 public class PatternParser {
 
 
-    public record CommandNode(String name, List<String> namesChain, List<ArgumentNode> arguments) {
+    public record CommandNode(String name,
+                              ArrayList<Pair<String, String>> properties,
+                              List<String> namesChain,
+                              List<ArgumentNode> arguments) {
     }
 
     public record ArgumentNode(String name,
@@ -40,16 +43,24 @@ public class PatternParser {
 
         var names = commandsNames();
         var name = names.get(names.size() - 1);
-        var arguments = arguments();
 
-        return new CommandNode(name, names, arguments);
+        var properties = new ArrayList<Pair<String, String>>();
+        if (iterator.isNext("(")) {
+            properties = getProperties();
+        }
+        var arguments = arguments();
+        return new CommandNode(name, properties, names, arguments);
     }
+
 
     public List<String> commandsNames() {
 
         var names = new ArrayList<String>();
         do {
             if (iterator.isNext("<")) {
+                break;
+            }
+            if (iterator.isNext("(")) {
                 break;
             }
             if (iterator.isNext("/")) {

@@ -10,7 +10,7 @@ import io.github.jwdeveloper.commands.api.annotations.FCommand;
 import io.github.jwdeveloper.commands.api.builders.CommandBuilder;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
 import io.github.jwdeveloper.commands.api.services.ActionsRegistry;
-import io.github.jwdeveloper.commands.core.impl.patterns.PatternService;
+import io.github.jwdeveloper.commands.core.impl.patterns.PatternBuilderVisitor;
 import io.github.jwdeveloper.commands.core.impl.services.ActionBindingService;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class TemplateService implements TemplateParser {
 
     private final DependanceContainer container;
-    private final PatternService patternService;
+    private final PatternBuilderVisitor patternService;
     private final CommandsRegistry commandsRegistry;
     private final ActionBindingService bindingService;
     private final ActionsRegistry actionsRegistry;
@@ -29,7 +29,7 @@ public class TemplateService implements TemplateParser {
 
     public TemplateService(
             ActionBindingService bindingService,
-            PatternService patternService,
+            PatternBuilderVisitor patternService,
             DependanceContainer container,
             ActionsRegistry actionsRegistry,
             CommandsRegistry commandsRegistry) {

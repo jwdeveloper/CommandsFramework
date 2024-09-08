@@ -16,6 +16,8 @@ public final class Example extends JavaPlugin {
         SpigotCommands commands = CommandsFramework.enable(this);
 
 
+
+
         commands.argumentTypes()
                 .createEnum("Attribute", Attribute.class)
                 .register();

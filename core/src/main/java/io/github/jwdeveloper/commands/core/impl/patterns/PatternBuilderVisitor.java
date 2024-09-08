@@ -5,12 +5,12 @@ import io.github.jwdeveloper.commands.api.data.ActionResult;
 import io.github.jwdeveloper.commands.api.data.DisplayAttribute;
 import io.github.jwdeveloper.commands.api.patterns.PatternsRegistry;
 
-public class PatternService {
+public class PatternBuilderVisitor {
 
     private final PatternParser parser;
     private final PatternsRegistry patterns;
 
-    public PatternService(PatternParser patternExpressionService, PatternsRegistry patterns) {
+    public PatternBuilderVisitor(PatternParser patternExpressionService, PatternsRegistry patterns) {
         this.parser = patternExpressionService;
         this.patterns = patterns;
     }
@@ -20,6 +20,7 @@ public class PatternService {
         if (result.isFailed()) {
             return result.cast();
         }
+
         var commandData = result.getValue();
         var namesChain = commandData.namesChain();
         if (!namesChain.isEmpty()) {
@@ -32,6 +33,12 @@ public class PatternService {
                 isFirst = false;
             }
         }
+        for (var property : commandData.properties()) {
+            var key = property.getKey();
+            var value = property.getValue();
+            patterns.apply(source, key, value, builder);
+        }
+
         builder.properties().name(commandData.name());
         for (var argument : commandData.arguments()) {
             var argumentBuilder = builder.argument(argument.name());
@@ -50,7 +57,7 @@ public class PatternService {
                 var key = property.getKey();
                 var value = property.getValue();
 
-                patterns.applyMapping(source, key, value, argumentBuilder);
+                patterns.apply(source, key, value, argumentBuilder);
             }
         }
         return ActionResult.success(builder);

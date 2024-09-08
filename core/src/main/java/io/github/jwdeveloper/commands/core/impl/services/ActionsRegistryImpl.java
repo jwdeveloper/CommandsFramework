@@ -11,6 +11,20 @@ import java.util.function.Function;
 public class ActionsRegistryImpl implements ActionsRegistry {
     private final Map<String, ActionData> actions = new HashMap<>();
 
+    @Override
+    public <I, O> ActionsRegistry register(String identifier, String eventName, Function<I, O> action) {
+        var key = getKey(identifier, Object.class);
+        actions.computeIfAbsent(key, s ->
+        {
+            var data = new ActionData();
+            data.tag(key);
+            data.inputType(Object.class);
+            data.function(action);
+            return data;
+        });
+        return this;
+    }
+
     public ActionResult<ActionData> find(String identifier, Class inputType) {
         var key = getKey(identifier, inputType);
         if (!actions.containsKey(key))
@@ -24,24 +38,9 @@ public class ActionsRegistryImpl implements ActionsRegistry {
     }
 
 
-    @Override
-    public <I, O> ActionsRegistry register(String identifier, Class<? extends I> inputType, Function<I, O> action) {
-        var key = getKey(identifier, inputType);
-        actions.computeIfAbsent(key, s ->
-        {
-            var data = new ActionData();
-            data.tag(key);
-            data.inputType(inputType);
-            data.function(action);
-            return data;
-        });
-        return this;
-    }
-
     private String getKey(String name, Class type) {
         return name + "@" + type.getName();
     }
-
 
 
     private Set<Method> getAllMethod(Class<?> type) {

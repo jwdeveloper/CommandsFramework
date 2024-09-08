@@ -104,21 +104,14 @@ public class CommandServices {
         argumentEvent.value(argumentNode.getValue());
         argumentEvent.rawValue(argumentNode.getValue() + "");
 
-
         var result = argument.suggestion().onSuggestion(argumentEvent);
         if (result.isFailed()) {
             throw new RuntimeException(result.getMessage());
         }
-        var values = result.getValue();
-        var argumentValue = argumentNode.getValue().toString();
-        if (!argumentValue.isEmpty() && !values.contains(argumentValue)) {
-
-//            var copy = new ArrayList<String>();
-//            copy.add("[!" + argumentValue + " is not acceptable !]");
-//            copy.addAll(values);
-//            return copy;
+        if (argument.hasDisplayAttribute(DisplayAttribute.NONE)) {
+            return Collections.emptyList();
         }
-        return values;
+        return result.getValue();
     }
 
 
