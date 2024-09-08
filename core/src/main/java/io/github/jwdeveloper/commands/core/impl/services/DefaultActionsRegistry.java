@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Function;
 
-public class ActionsRegistryImpl implements ActionsRegistry {
+public class DefaultActionsRegistry implements ActionsRegistry {
     private final Map<String, ActionData> actions = new HashMap<>();
 
     @Override

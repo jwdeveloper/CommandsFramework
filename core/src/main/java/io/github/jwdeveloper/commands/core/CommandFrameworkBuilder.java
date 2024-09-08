@@ -26,8 +26,8 @@ import io.github.jwdeveloper.commands.core.impl.patterns.PatternParser;
 import io.github.jwdeveloper.commands.core.impl.patterns.PatternBuilderVisitor;
 import io.github.jwdeveloper.commands.core.impl.patterns.DefaultPatternsRegistry;
 import io.github.jwdeveloper.commands.core.impl.services.ActionBindingService;
-import io.github.jwdeveloper.commands.core.impl.services.ActionsRegistryImpl;
-import io.github.jwdeveloper.commands.core.impl.services.MessagesServiceImpl;
+import io.github.jwdeveloper.commands.core.impl.services.DefaultActionsRegistry;
+import io.github.jwdeveloper.commands.core.impl.services.DefaultMessagesService;
 import io.github.jwdeveloper.commands.core.impl.templates.TemplateService;
 
 import java.util.function.Consumer;
@@ -38,10 +38,10 @@ public class CommandFrameworkBuilder {
         var containerBuilder = Dependance.newContainer();
         containerBuilder.registerSingleton(Commands.class, DefaultCommands.class);
         containerBuilder.registerSingleton(CommandsRegistry.class, DefaultCommandsRegistry.class);
-        containerBuilder.registerSingleton(ActionsRegistry.class, ActionsRegistryImpl.class);
+        containerBuilder.registerSingleton(ActionsRegistry.class, DefaultActionsRegistry.class);
         containerBuilder.registerSingleton(PatternsRegistry.class, DefaultPatternsRegistry.class);
         containerBuilder.registerSingleton(ArgumentsTypesRegistry.class, DefaultArgumentTypesRegistry.class);
-        containerBuilder.registerSingleton(MessagesService.class, MessagesServiceImpl.class);
+        containerBuilder.registerSingleton(MessagesService.class, DefaultMessagesService.class);
         containerBuilder.registerSingleton(ValidationService.class, DefaultValidationService.class);
 
         containerBuilder.registerTransient(ArgumentTypeBuilder.class, ArgumentTypeBuilderImpl.class);

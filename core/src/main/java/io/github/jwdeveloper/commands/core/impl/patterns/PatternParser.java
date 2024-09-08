@@ -1,7 +1,7 @@
 package io.github.jwdeveloper.commands.core.impl.patterns;
 
-import io.github.jwdeveloper.commands.core.impl.data.ArgumentNode;
-import io.github.jwdeveloper.commands.core.impl.data.CommandNode;
+import io.github.jwdeveloper.commands.core.impl.data.ArgumentPatternNode;
+import io.github.jwdeveloper.commands.core.impl.data.CommandPatternNode;
 import io.github.jwdeveloper.dependance.injector.api.util.Pair;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
 
@@ -24,12 +24,12 @@ import java.util.List;
 public class PatternParser {
     private PatternTokenizer iterator;
 
-    public ActionResult<CommandNode> resolve(String pattern) {
+    public ActionResult<CommandPatternNode> resolve(String pattern) {
         iterator = new PatternTokenizer(pattern);
         return ActionResult.success(command());
     }
 
-    private CommandNode command() {
+    private CommandPatternNode command() {
         var names = names();
         var name = names.get(names.size() - 1);
 
@@ -38,7 +38,7 @@ public class PatternParser {
             properties = properties();
         }
         var arguments = arguments();
-        return new CommandNode(name, properties, names, arguments);
+        return new CommandPatternNode(name, properties, names, arguments);
     }
 
     public List<String> names() {
@@ -61,8 +61,8 @@ public class PatternParser {
         return names;
     }
 
-    public List<ArgumentNode> arguments() {
-        var arguments = new ArrayList<ArgumentNode>();
+    public List<ArgumentPatternNode> arguments() {
+        var arguments = new ArrayList<ArgumentPatternNode>();
         while (iterator.hasNext()) {
             iterator.nextOrThrow("<");
             arguments.add(argument());
@@ -71,7 +71,7 @@ public class PatternParser {
         return arguments;
     }
 
-    private ArgumentNode argument() {
+    private ArgumentPatternNode argument() {
 
         var required = true;
         var startedWithRequired = false;
@@ -93,7 +93,7 @@ public class PatternParser {
         while (iterator.isNext("(")) {
             properties = properties();
         }
-        return new ArgumentNode(name, type, required, suggestions, properties, defaultValue);
+        return new ArgumentPatternNode(name, type, required, suggestions, properties, defaultValue);
     }
 
     private ArrayList<Pair<String, String>> properties() {
