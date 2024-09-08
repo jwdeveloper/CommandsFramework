@@ -1,4 +1,4 @@
-package io.github.jwdeveloper.commands.minestom;
+package io.github.jwdeveloper.commands.minestom.impl;
 
 import io.github.jwdeveloper.commands.api.Command;
 import io.github.jwdeveloper.commands.api.CommandsRegistry;
@@ -7,17 +7,20 @@ import net.minestom.server.command.CommandManager;
 
 import java.util.List;
 
+//TODO make minestom commands registry
 public class MinestomCommandsRegistry implements CommandsRegistry {
 
     CommandManager commandManager;
 
-    public MinestomCommandsRegistry()
-    {
+    public MinestomCommandsRegistry() {
         commandManager = MinecraftServer.getCommandManager();
     }
 
     @Override
     public boolean add(Command command) {
+
+        MinestomCommand minestomCommand = new MinestomCommand(command);
+        //TODO save commands to hashmap and and make it listen for command minestom event
         return false;
     }
 

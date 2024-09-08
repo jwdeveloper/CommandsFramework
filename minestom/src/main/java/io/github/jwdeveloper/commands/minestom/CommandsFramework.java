@@ -4,7 +4,12 @@ import io.github.jwdeveloper.commands.api.Commands;
 import io.github.jwdeveloper.commands.api.argumetns.ArgumentsTypesRegistry;
 import io.github.jwdeveloper.commands.api.builders.CommandBuilder;
 import io.github.jwdeveloper.commands.api.exceptions.ArgumentException;
+import io.github.jwdeveloper.commands.api.services.ValidationService;
 import io.github.jwdeveloper.commands.core.CommandFrameworkBuilder;
+import io.github.jwdeveloper.commands.minestom.api.MinestomCommandBuilder;
+import io.github.jwdeveloper.commands.minestom.api.MinestomCommands;
+import io.github.jwdeveloper.commands.minestom.impl.MinestomCommandsRegistry;
+import io.github.jwdeveloper.commands.minestom.impl.MinestomValidationService;
 import io.github.jwdeveloper.dependance.implementation.DependanceContainerBuilder;
 import io.github.jwdeveloper.commands.api.CommandsRegistry;
 import net.minestom.server.entity.EntityType;
@@ -12,12 +17,37 @@ import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.Material;
 import net.minestom.server.registry.StaticProtocolObject;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Consumer;
 
 public class CommandsFramework {
 
     private static MinestomCommands commands;
+
+    public static MinestomCommands enable(Consumer<DependanceContainerBuilder> action) {
+        commands = (MinestomCommands) CommandFrameworkBuilder.create(container ->
+        {
+            container.registerSingleton(CommandsRegistry.class, MinestomCommandsRegistry.class);
+            container.registerSingleton(ValidationService.class, MinestomValidationService.class);
+
+
+            container.registerProxy(CommandBuilder.class, MinestomCommandBuilder.class);
+            container.registerProxy(Commands.class, MinestomCommands.class);
+
+            action.accept(container);
+        });
+
+        var argumentTypes = commands.argumentTypes();
+        try {
+            registerMinestomType(argumentTypes, Block.class);
+            registerMinestomType(argumentTypes, Material.class);
+            registerMinestomType(argumentTypes, EntityType.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return commands;
+    }
 
     public static boolean isEnabled() {
         return commands != null;
@@ -43,35 +73,28 @@ public class CommandsFramework {
         });
     }
 
-    public static MinestomCommands enable(Consumer<DependanceContainerBuilder> action) {
-        commands = (MinestomCommands) CommandFrameworkBuilder.create(container ->
-        {
-            container.registerSingleton(CommandsRegistry.class, MinestomCommandsRegistry.class);
 
-            container.registerProxy(CommandBuilder.class, MinestomCommandBuilder.class);
-            container.registerProxy(Commands.class, MinestomCommands.class);
+    /**
+     * Register Minestom server type such as Block, Material, EntityType etc..
+     * as the command argument
+     *
+     * @param argumentTypes
+     * @param minestomType
+     */
+    private static void registerMinestomType(ArgumentsTypesRegistry argumentTypes, Class minestomType) {
 
-            action.accept(container);
-        });
+        /**
+         * Method that getting instance of given class from string,
+         * in this example, Block
+         * Block.fromNamespaceId("Air");
+         *
+         * Method that returns array of values for given type
+         * Block.values();
+         */
 
-        var argumentTypes = commands.argumentTypes();
-        try {
-            registerMinestomType(argumentTypes, Block.class);
-            registerMinestomType(argumentTypes, Material.class);
-            registerMinestomType(argumentTypes, EntityType.class);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return commands;
-    }
-
-    private static void registerMinestomType(ArgumentsTypesRegistry builder, Class type) throws NoSuchMethodException {
-
-        var namespaceMethod = type.getMethod("fromNamespaceId", type);
-        var valuesMethod = type.getMethod("values", type);
-        builder.create(type.getSimpleName())
+        var namespaceMethod = Arrays.stream(minestomType.getDeclaredMethods()).filter(e -> e.getName().equals("fromNamespaceId")).findFirst().orElseThrow();
+        var valuesMethod = Arrays.stream(minestomType.getDeclaredMethods()).filter(e -> e.getName().equals("values")).findFirst().orElseThrow();
+        argumentTypes.create(minestomType.getSimpleName())
                 .onParse(event ->
                 {
                     try {
