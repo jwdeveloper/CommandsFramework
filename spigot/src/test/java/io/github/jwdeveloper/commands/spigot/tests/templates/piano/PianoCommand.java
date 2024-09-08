@@ -1,4 +1,4 @@
-package io.github.jwdeveloper.spigot.commands.impl.templates.piano;
+package io.github.jwdeveloper.commands.spigot.tests.templates.piano;
 
 import io.github.jwdeveloper.commands.api.annotations.FCommand;
 import org.bukkit.entity.Player;

@@ -1,6 +1,7 @@
 package io.github.jwdeveloper.commands.core.impl.templates;
 
 import io.github.jwdeveloper.dependance.api.DependanceContainer;
+
 import io.github.jwdeveloper.commands.api.CommandsRegistry;
 import io.github.jwdeveloper.commands.api.TemplateParser;
 import io.github.jwdeveloper.commands.api.annotations.FAction;
@@ -11,8 +12,6 @@ import io.github.jwdeveloper.commands.api.data.ActionResult;
 import io.github.jwdeveloper.commands.api.services.ActionsRegistry;
 import io.github.jwdeveloper.commands.core.impl.patterns.PatternService;
 import io.github.jwdeveloper.commands.core.impl.services.ActionBindingService;
-import org.bukkit.command.CommandSender;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
@@ -137,12 +136,12 @@ public class TemplateService implements TemplateParser {
 
     private void handleCommandMethod(Object target, Method method, FCommand fCommand, CommandBuilder builder) {
         builder = decorateBuilder(target, fCommand, builder);
-        var senderTypeOptional = Arrays.stream(method.getParameterTypes())
-                .filter(CommandSender.class::isAssignableFrom)
-                .findFirst();
-
-        var senderType = senderTypeOptional.orElse(CommandSender.class);
-        var handler = new TemplateMethodHandler(target, method, container.createChildContainer());
+//        var senderTypeOptional = Arrays.stream(method.getParameterTypes())
+//                .filter(CommandSender.class::isAssignableFrom)
+//                .findFirst();
+//
+//        var senderType = senderTypeOptional.orElse(CommandSender.class);
+//        var handler = new TemplateMethodHandler(target, method, container.createChildContainer());
      //   builder.onEvent(senderType, handler::invokeEvent);
 
 

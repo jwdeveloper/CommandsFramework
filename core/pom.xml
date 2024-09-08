@@ -12,12 +12,12 @@
     <artifactId>commands-framework-core</artifactId>
 
     <dependencies>
-        <dependency>
+  <!--      <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>io.github.jwdeveloper.spigot.commands</groupId>
             <artifactId>commands-framework-api</artifactId>

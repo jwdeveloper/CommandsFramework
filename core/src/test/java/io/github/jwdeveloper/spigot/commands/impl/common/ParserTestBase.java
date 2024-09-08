@@ -1,9 +1,10 @@
-package io.github.jwdeveloper.spigot.commands.impl;
+package io.github.jwdeveloper.spigot.commands.impl.common;
 
 import io.github.jwdeveloper.commands.api.argumetns.ArgumentType;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
 import io.github.jwdeveloper.commands.api.data.events.ArgumentParseEvent;
 import io.github.jwdeveloper.commands.api.iterators.ArgumentIterator;
+import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
 
 public abstract class ParserTestBase extends CommandsTestBase {
 

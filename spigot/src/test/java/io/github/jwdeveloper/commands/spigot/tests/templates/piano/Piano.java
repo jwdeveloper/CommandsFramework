@@ -1,4 +1,4 @@
-package io.github.jwdeveloper.spigot.commands.impl.templates.piano;
+package io.github.jwdeveloper.commands.spigot.tests.templates.piano;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

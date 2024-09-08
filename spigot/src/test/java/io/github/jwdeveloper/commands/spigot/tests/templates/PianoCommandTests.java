@@ -1,15 +1,16 @@
-package io.github.jwdeveloper.spigot.commands.impl.templates;
+package io.github.jwdeveloper.commands.spigot.tests.templates;
 
 import io.github.jwdeveloper.commands.api.Commands;
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
-import io.github.jwdeveloper.spigot.commands.impl.templates.piano.Piano;
-import io.github.jwdeveloper.spigot.commands.impl.templates.piano.PianoCommand;
-import io.github.jwdeveloper.spigot.commands.impl.templates.piano.PianoService;
+
+import io.github.jwdeveloper.commands.spigot.tests.common.SpigotTestBase;
+import io.github.jwdeveloper.commands.spigot.tests.templates.piano.Piano;
+import io.github.jwdeveloper.commands.spigot.tests.templates.piano.PianoCommand;
+import io.github.jwdeveloper.commands.spigot.tests.templates.piano.PianoService;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PianoCommandTests extends CommandsTestBase {
+public class PianoCommandTests extends SpigotTestBase {
 
     @Override
     protected void onBefore(Commands commands) {

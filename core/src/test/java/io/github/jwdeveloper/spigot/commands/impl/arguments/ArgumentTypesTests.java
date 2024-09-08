@@ -1,50 +1,40 @@
-package io.github.jwdeveloper.spigot.commands.impl.examples;
+package io.github.jwdeveloper.spigot.commands.impl.arguments;
 
 import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
-import io.github.jwdeveloper.commands.api.exceptions.ArgumentException;
-import org.bukkit.Material;
+import io.github.jwdeveloper.spigot.commands.impl.common.ExampleEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
-
 public class ArgumentTypesTests extends CommandsTestBase {
 
 
     @Test
     public void custom_argument_should_work() {
         api.argumentTypes()
-                .create("Sword")
+                .create("ExampleEnum")
                 .onParse(argumentParseEvent ->
                 {
                     var name = argumentParseEvent.nextArgument();
-                    name = name.replace(" ", "_").toUpperCase();
-                    var material = Material.getMaterial(name);
-                    if (!material.isItem()) {
-                        throw new ArgumentException("Must be item!");
-                    }
-                    return material;
+                    return ExampleEnum.valueOf(name);
                 })
-                .onSuggestion(argumentSuggestionEvent ->
-                        Stream.of(Material.DIAMOND_SWORD, Material.GOLDEN_SWORD)
-                                .map(Enum::name)
-                                .toList())
+                .onSuggestion(argumentSuggestionEvent -> Arrays.stream(ExampleEnum.values()).map(Enum::name).toList())
                 .register();
 
-        var command = create("/give <item:Sword(ds)>").register();
-        var event = execute(command.name(), "Diamond_sword");
+        var command = create("/give <enum:ExampleEnum>").register();
+        var event = execute(command.name(), "ONE");
         assertTrue(event);
 
         Assertions.assertEquals(1, event.getValue().argumentCount());
-        var materialOutput = event.getValue().getArgument("item", Material.class);
-        Assertions.assertEquals(Material.DIAMOND_SWORD, materialOutput);
+        var enumValue = event.getValue().getArgument("enum", ExampleEnum.class);
+        Assertions.assertEquals(ExampleEnum.ONE, enumValue);
 
         var suggestions = executeSuggestions(command.name(), "");
         assertTrue(suggestions);
-        Assertions.assertEquals("DIAMOND_SWORD", suggestions.getValue().get(0));
-        Assertions.assertEquals("GOLDEN_SWORD", suggestions.getValue().get(1));
+        Assertions.assertEquals("ONE", suggestions.getValue().get(0));
+        Assertions.assertEquals("TWO", suggestions.getValue().get(1));
     }
 
     @Test

@@ -14,7 +14,6 @@ import io.github.jwdeveloper.commands.core.impl.services.CommandEventsImpl;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.bukkit.command.CommandSender;
 
 import java.util.*;
 import java.util.stream.Collectors;

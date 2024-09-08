@@ -1,18 +1,19 @@
 package io.github.jwdeveloper.commands.core.impl.templates;
 
 import io.github.jwdeveloper.dependance.api.DependanceContainer;
+
 import io.github.jwdeveloper.dependance.implementation.DependanceContainerBuilder;
 import io.github.jwdeveloper.dependance.injector.api.events.events.OnInjectionEvent;
 import io.github.jwdeveloper.commands.api.Command;
 import io.github.jwdeveloper.commands.api.data.events.CommandErrorEvent;
 import io.github.jwdeveloper.commands.api.data.events.CommandEventImpl;
 import io.github.jwdeveloper.commands.api.data.expressions.CommandNode;
-import org.bukkit.command.CommandSender;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class TemplateMethodHandler {
 
@@ -46,7 +47,7 @@ public class TemplateMethodHandler {
     private DependanceContainer createContainer(DependanceContainerBuilder builder) {
         builder.registerSingleton(CommandEventImpl.class, container1 -> commandEvent);
         builder.registerSingleton(Command.class, container1 -> commandEvent.command());
-        builder.registerSingleton(CommandSender.class, container1 -> commandEvent.sender());
+        //builder.registerSingleton(CommandSender.class, container1 -> commandEvent.sender());
         builder.configure(configuration ->
         {
             configuration.onInjection(this::handleArguments);
@@ -56,12 +57,12 @@ public class TemplateMethodHandler {
     }
 
     private Object handleSender(OnInjectionEvent event) {
-        if (event.input().equals(CommandSender.class)) {
+        /*if (event.input().equals(CommandSender.class)) {
             return event.output();
         }
         if (CommandSender.class.isAssignableFrom(event.input())) {
             return event.container().find(CommandSender.class);
-        }
+        }*/
         return event.output();
     }
 

@@ -1,4 +1,4 @@
-package io.github.jwdeveloper.spigot.commands.impl.templates;
+package io.github.jwdeveloper.commands.spigot.tests.templates;
 
 import io.github.jwdeveloper.commands.api.annotations.FArgument;
 import io.github.jwdeveloper.commands.api.annotations.FCommand;

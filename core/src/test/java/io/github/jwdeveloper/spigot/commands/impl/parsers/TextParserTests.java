@@ -2,7 +2,7 @@ package io.github.jwdeveloper.spigot.commands.impl.parsers;
 
 import io.github.jwdeveloper.commands.core.impl.parsers.TextParser;
 import io.github.jwdeveloper.commands.api.argumetns.ArgumentType;
-import io.github.jwdeveloper.spigot.commands.impl.ParserTestBase;
+import io.github.jwdeveloper.spigot.commands.impl.common.ParserTestBase;
 import org.junit.jupiter.api.Test;
 
 public class TextParserTests extends ParserTestBase {

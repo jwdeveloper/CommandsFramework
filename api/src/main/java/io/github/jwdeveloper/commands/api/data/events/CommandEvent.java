@@ -54,7 +54,11 @@ public interface CommandEvent<SENDER> {
 
     String getString(int index);
 
-    String getString(String word);
+    String getString(String argumentName);
 
     Double getNumber(int index);
+
+    Boolean getBool(String argumentName);
+
+    Boolean getBool(int index);
 }

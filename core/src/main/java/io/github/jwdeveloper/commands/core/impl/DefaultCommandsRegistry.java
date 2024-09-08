@@ -1,8 +1,8 @@
 package io.github.jwdeveloper.commands.core.impl;
 
 import io.github.jwdeveloper.commands.api.Command;
+
 import io.github.jwdeveloper.commands.api.CommandsRegistry;
-import org.bukkit.plugin.Plugin;
 
 import java.util.*;
 
@@ -11,18 +11,15 @@ import java.util.*;
  */
 public class DefaultCommandsRegistry implements CommandsRegistry {
     private final Map<String, DefaultCommand> commands;
-    private final Plugin plugin;
 
-    public DefaultCommandsRegistry(Plugin plugin) {
+    public DefaultCommandsRegistry() {
         commands = new HashMap<>();
-        this.plugin = plugin;
     }
 
     @Override
     public boolean add(Command command) {
         var name = command.properties().name();
         if (commands.containsKey(name)) {
-            plugin.getLogger().info("command already exists " + name);
             return false;
         }
         commands.put(name, (DefaultCommand) command);

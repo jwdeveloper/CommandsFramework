@@ -131,11 +131,16 @@ public class CommandEventImpl<T> implements CommandEvent<T> {
         return getArgument(index, Double.class);
     }
 
-    public Command command() {
-        return executedCommand.getCommand();
+    public Boolean getBool(String argumentName) {
+        return getArgument(argumentName, Boolean.class);
     }
 
-    public Boolean getBool(String argument) {
-        return getArgument(argument, Boolean.class);
+    @Override
+    public Boolean getBool(int index) {
+        return getArgument(index, Boolean.class);
+    }
+
+    public Command command() {
+        return executedCommand.getCommand();
     }
 }

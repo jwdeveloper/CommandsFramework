@@ -1,16 +1,16 @@
-package io.github.jwdeveloper.spigot.commands.impl.examples;
+package io.github.jwdeveloper.commands.spigot.tests.examples;
 
 import io.github.jwdeveloper.commands.api.Command;
 import io.github.jwdeveloper.commands.api.Commands;
-import io.github.jwdeveloper.commands.core.impl.services.ExpressionService;
-import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
 import io.github.jwdeveloper.commands.api.data.events.CommandEventImpl;
+import io.github.jwdeveloper.commands.core.impl.services.ExpressionService;
+import io.github.jwdeveloper.commands.spigot.tests.common.SpigotTestBase;
 import io.github.jwdeveloper.commands.api.exceptions.ArgumentException;
 import org.bukkit.entity.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CommandEventTest extends CommandsTestBase {
+public class CommandEventTest extends SpigotTestBase {
 
 
     Command command;
@@ -26,11 +26,11 @@ public class CommandEventTest extends CommandsTestBase {
     public void should_have_arguments_values() {
 
 
-        var expresion = service.parse(command, sender, false, "john", "12", "farmer");
+        var expresion = service.parse(command, playerSender, false, "john", "12", "farmer");
 
         assertTrue(expresion);
 
-        var event = new CommandEventImpl<Player>(sender, expresion.getValue().getCommandNodes());
+        var event = new CommandEventImpl<Player>(playerSender, expresion.getValue().getCommandNodes());
 
 
         Assertions.assertTrue(event.hasArgument(0));
@@ -53,9 +53,9 @@ public class CommandEventTest extends CommandsTestBase {
     @Test
     public void should_throw_when_not_existst() {
 
-        var expresion = service.parse(command, sender, false, "john", "12", "farmer");
+        var expresion = service.parse(command, playerSender, false, "john", "12", "farmer");
         assertTrue(expresion);
-        var event = new CommandEventImpl<Player>(sender, expresion.getValue().getCommandNodes());
+        var event = new CommandEventImpl<Player>(playerSender, expresion.getValue().getCommandNodes());
 
         Assertions.assertFalse(event.hasArgument(4));
         Assertions.assertFalse(event.hasArgument("not exists"));
@@ -72,9 +72,9 @@ public class CommandEventTest extends CommandsTestBase {
     @Test
     public void should_throw_when_type_mishmash() {
 
-        var expresion = service.parse(command, sender, false, "john", "12", "farmer");
+        var expresion = service.parse(command, playerSender, false, "john", "12", "farmer");
         assertTrue(expresion);
-        var event = new CommandEventImpl<Player>(sender, expresion.getValue().getCommandNodes());
+        var event = new CommandEventImpl<Player>(playerSender, expresion.getValue().getCommandNodes());
 
 
         Assertions.assertThrows(ArgumentException.class, () ->

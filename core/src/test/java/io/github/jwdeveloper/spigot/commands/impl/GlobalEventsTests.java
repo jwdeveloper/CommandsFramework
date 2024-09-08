@@ -1,4 +1,4 @@
-package io.github.jwdeveloper.spigot.commands.impl.examples;
+package io.github.jwdeveloper.spigot.commands.impl;
 
 import io.github.jwdeveloper.commands.core.impl.data.Ref;
 import io.github.jwdeveloper.spigot.commands.impl.CommandsTestBase;
