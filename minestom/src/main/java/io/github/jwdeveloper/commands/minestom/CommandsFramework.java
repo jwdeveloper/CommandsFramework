@@ -10,6 +10,7 @@ import io.github.jwdeveloper.commands.minestom.api.MinestomCommandBuilder;
 import io.github.jwdeveloper.commands.minestom.api.MinestomCommands;
 import io.github.jwdeveloper.commands.minestom.impl.MinestomCommandsRegistry;
 import io.github.jwdeveloper.commands.minestom.impl.MinestomValidationService;
+import io.github.jwdeveloper.commands.minestom.impl.TabCompleteListener;
 import io.github.jwdeveloper.dependance.implementation.DependanceContainerBuilder;
 import io.github.jwdeveloper.commands.api.CommandsRegistry;
 import net.minestom.server.entity.EntityType;
@@ -28,6 +29,8 @@ public class CommandsFramework {
     public static MinestomCommands enable(Consumer<DependanceContainerBuilder> action) {
         commands = (MinestomCommands) CommandFrameworkBuilder.create(container ->
         {
+
+            container.registerSingleton(TabCompleteListener.class);
             container.registerSingleton(CommandsRegistry.class, MinestomCommandsRegistry.class);
             container.registerSingleton(ValidationService.class, MinestomValidationService.class);
 
@@ -37,6 +40,10 @@ public class CommandsFramework {
 
             action.accept(container);
         });
+
+
+        var tabCompleteListener = commands.container().find(TabCompleteListener.class);
+        tabCompleteListener.enable();
 
         var argumentTypes = commands.argumentTypes();
         try {

@@ -44,7 +44,7 @@ public class CommandProperties {
     /**
      * Command aliases
      */
-    private String[] aliases;
+    private String[] aliases = new String[0];
 
     /**
      * Label
