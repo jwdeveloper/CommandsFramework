@@ -6,11 +6,20 @@ import io.github.jwdeveloper.commands.api.CommandsRegistry;
 import io.github.jwdeveloper.commands.api.builders.CommandBuilder;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
 import io.github.jwdeveloper.commands.api.data.events.CommandEvent;
+import io.github.jwdeveloper.commands.api.services.ValidationService;
 import io.github.jwdeveloper.commands.core.impl.DefaultCommandsRegistry;
 import io.github.jwdeveloper.commands.spigot.CommandsFramework;
+import io.github.jwdeveloper.commands.spigot.api.SpigotCommandBuilder;
 import io.github.jwdeveloper.commands.spigot.api.SpigotCommands;
+import io.github.jwdeveloper.commands.spigot.impl.PluginDisableListener;
+import io.github.jwdeveloper.commands.spigot.impl.SpigotCommandsRegistry;
+import io.github.jwdeveloper.commands.spigot.impl.services.SpigotValidationService;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.command.BlockCommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.ProxiedCommandSender;
+import org.bukkit.command.RemoteConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -31,6 +40,7 @@ public abstract class SpigotTestBase {
     protected MockedStatic<Bukkit> bukkitMock;
 
     protected Player playerSender;
+    protected BlockCommandSender blockSender;
 
     protected void onBefore(Commands commands) {
 
@@ -77,6 +87,7 @@ public abstract class SpigotTestBase {
     public void setUp() {
         var plugin = mock(Plugin.class);
         playerSender = mock(Player.class);
+        blockSender = mock(BlockCommandSender.class);
         bukkitMock = mockStatic(Bukkit.class);
 
         // Create mock Server and PluginManager instances
@@ -89,6 +100,7 @@ public abstract class SpigotTestBase {
         api = CommandsFramework.enable(plugin, builder ->
         {
             builder.registerSingleton(CommandsRegistry.class, DefaultCommandsRegistry.class);
+            builder.registerSingleton(ValidationService.class, SpigotValidationService.class);
         });
         onBefore(api);
     }

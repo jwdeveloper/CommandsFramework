@@ -1,12 +1,21 @@
 package io.github.jwdeveloper.commands.spigot.api;
 
 import io.github.jwdeveloper.commands.api.builders.CommandBuilder;
+import io.github.jwdeveloper.commands.api.data.CommandProperties;
 import io.github.jwdeveloper.commands.api.functions.CommandEventInvoker;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
+import java.util.function.Consumer;
+
 public interface SpigotCommandBuilder extends CommandBuilder<SpigotCommandBuilder, CommandSender> {
 
+    // Conor-10.09.2024: Is this correct?! Otherwise, I get a NPE when trying to use #withExcludedSenders,
+    // because CommandBuilder#withProperties returns null
+    @Override
+    default SpigotCommandBuilder withProperties(Consumer<CommandProperties> properties) {
+        return this;
+    }
 
     /**
      * Registers an event action to be executed when a command is run by a ProxiedCommandSender.

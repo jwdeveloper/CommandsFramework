@@ -15,7 +15,9 @@ import io.github.jwdeveloper.commands.spigot.impl.parsers.LocationParser;
 import io.github.jwdeveloper.commands.core.impl.parsers.NumberParser;
 import io.github.jwdeveloper.commands.spigot.impl.parsers.PlayerParser;
 import org.bukkit.*;
+import org.bukkit.command.*;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -45,6 +47,13 @@ public class CommandsFramework {
 
             action.accept(container);
         });
+        var senders = commands.commandSenders();
+        senders.register(Player.class);
+        senders.register(ConsoleCommandSender.class);
+        senders.register(ProxiedCommandSender.class);
+        senders.register(BlockCommandSender.class);
+        senders.register(RemoteConsoleCommandSender.class);
+
         var argumentTypes = commands.argumentTypes();
 
         argumentTypes.register(new PlayerParser());
