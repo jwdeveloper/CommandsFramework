@@ -26,7 +26,7 @@ public interface CommandsSendersRegistry {
      */
     default boolean isRegistered(Class<?> commandSenderClazz) {
         return getCommandSenders().stream()
-                .anyMatch(commandSenderClazz::isAssignableFrom);
+                .anyMatch((cs) -> cs.isAssignableFrom(commandSenderClazz));
     }
 
     /**

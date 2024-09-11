@@ -4,8 +4,13 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+        <option value="$PROJECT_DIR$/minestom-example/pom.xml" />
+        <option value="$PROJECT_DIR$/spigot-example/pom.xml" />
+        <option value="$PROJECT_DIR$/minestom/pom.xml" />
+        <option value="$PROJECT_DIR$/spigot/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/example/pom.xml" />
+        <option value="$PROJECT_DIR$/core/pom.xml" />
+        <option value="$PROJECT_DIR$/api/pom.xml" />
       </list>
     </option>
   </component>
