@@ -3,8 +3,10 @@ package io.github.jwdeveloper.commands.api;
 import io.github.jwdeveloper.commands.api.argumetns.ArgumentsTypesRegistry;
 import io.github.jwdeveloper.commands.api.builders.CommandBuilder;
 import io.github.jwdeveloper.commands.api.builders.DefaultCommandBuilder;
+import io.github.jwdeveloper.commands.api.data.CommandProperties;
 import io.github.jwdeveloper.commands.api.patterns.PatternsRegistry;
 import io.github.jwdeveloper.commands.api.services.ActionsRegistry;
+import io.github.jwdeveloper.commands.api.services.CommandSenderRegistry;
 import io.github.jwdeveloper.dependance.api.DependanceContainer;
 
 import java.util.List;
@@ -29,6 +31,12 @@ public interface Commands {
      * @return a new instance of {@link ArgumentsTypesRegistry}.
      */
     ArgumentsTypesRegistry argumentTypes();
+
+    /**
+     * Command sender registry object, modify to add new valid command senders
+     * @return an instance of {@link CommandSenderRegistry}.
+     */
+    CommandSenderRegistry commandSenders();
 
     /**
      * Creates a new command builder for a command with the specified pattern.
