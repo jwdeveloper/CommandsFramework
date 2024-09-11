@@ -1,6 +1,6 @@
 package io.github.jwdeveloper.commands.core;
 
-import io.github.jwdeveloper.commands.api.services.CommandSenderRegistry;
+import io.github.jwdeveloper.commands.api.services.CommandsSendersRegistry;
 import io.github.jwdeveloper.commands.api.services.ValidationService;
 import io.github.jwdeveloper.commands.core.impl.DefaultCommandSenderRegistry;
 import io.github.jwdeveloper.commands.core.impl.parsers.BoolParser;
@@ -45,7 +45,7 @@ public class CommandFrameworkBuilder {
         containerBuilder.registerSingleton(ArgumentsTypesRegistry.class, DefaultArgumentTypesRegistry.class);
         containerBuilder.registerSingleton(MessagesService.class, DefaultMessagesService.class);
         containerBuilder.registerSingleton(ValidationService.class, DefaultValidationService.class);
-        containerBuilder.registerSingleton(CommandSenderRegistry.class, DefaultCommandSenderRegistry.class);
+        containerBuilder.registerSingleton(CommandsSendersRegistry.class, DefaultCommandSenderRegistry.class);
 
         containerBuilder.registerTransient(ArgumentTypeBuilder.class, ArgumentTypeBuilderImpl.class);
         containerBuilder.registerTransient(CommandBuilder.class, CommandBuilderImpl.class);

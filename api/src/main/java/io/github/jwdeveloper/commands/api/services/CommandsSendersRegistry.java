@@ -5,7 +5,7 @@ import io.github.jwdeveloper.commands.api.data.CommandProperties;
 import java.util.Set;
 
 /* Created by Conor on 10.09.2024 */
-public interface CommandSenderRegistry {
+public interface CommandsSendersRegistry {
 
     /**
      * Registers the given class for future use as a command sender

@@ -1,6 +1,6 @@
 package io.github.jwdeveloper.commands.core.impl;
 
-import io.github.jwdeveloper.commands.api.services.CommandSenderRegistry;
+import io.github.jwdeveloper.commands.api.services.CommandsSendersRegistry;
 import io.github.jwdeveloper.dependance.api.DependanceContainer;
 import io.github.jwdeveloper.commands.api.Command;
 import io.github.jwdeveloper.commands.api.Commands;
@@ -28,7 +28,7 @@ public class DefaultCommands implements Commands {
     private final PatternsRegistry patterns;
     private final DependanceContainer container;
     private final ArgumentsTypesRegistry argumentTypes;
-    private final CommandSenderRegistry commandSenders;
+    private final CommandsSendersRegistry commandSenders;
 
     public DefaultCommands(CommandsRegistry commandsRegistry,
                            DependanceContainer container,
@@ -37,7 +37,7 @@ public class DefaultCommands implements Commands {
                            PatternBuilderVisitor patternService,
                            ActionsRegistry actionsRegistry,
                            PatternsRegistry patterns,
-                           CommandSenderRegistry commandSenders) {
+                           CommandsSendersRegistry commandSenders) {
         this.patterns = patterns;
         this.commandsRegistry = commandsRegistry;
         this.container = container;

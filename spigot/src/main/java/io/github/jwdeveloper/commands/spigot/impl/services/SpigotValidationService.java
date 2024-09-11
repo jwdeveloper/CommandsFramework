@@ -3,7 +3,7 @@ package io.github.jwdeveloper.commands.spigot.impl.services;
 import io.github.jwdeveloper.commands.api.Command;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
 import io.github.jwdeveloper.commands.api.data.events.CommandValidationEvent;
-import io.github.jwdeveloper.commands.api.services.CommandSenderRegistry;
+import io.github.jwdeveloper.commands.api.services.CommandsSendersRegistry;
 import io.github.jwdeveloper.commands.api.services.MessagesService;
 import io.github.jwdeveloper.commands.api.services.ValidationService;
 import io.github.jwdeveloper.commands.core.impl.services.CommandEventsImpl;
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class SpigotValidationService implements ValidationService {
     private final MessagesService messages;
-    private final CommandSenderRegistry senders;
+    private final CommandsSendersRegistry senders;
 
-    public SpigotValidationService(MessagesService messages, CommandSenderRegistry senders) {
+    public SpigotValidationService(MessagesService messages, CommandsSendersRegistry senders) {
         this.messages = messages;
         this.senders = senders;
     }

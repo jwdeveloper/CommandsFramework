@@ -1,5 +1,6 @@
 package io.github.jwdeveloper.commands.core.impl.services;
 
+import io.github.jwdeveloper.commands.api.services.ValidationService;
 import io.github.jwdeveloper.dependance.injector.api.util.Pair;
 import io.github.jwdeveloper.commands.api.Command;
 import io.github.jwdeveloper.commands.api.data.ActionResult;
@@ -10,10 +11,10 @@ import java.util.*;
 
 public class ExpressionService {
 
-    private final DefaultValidationService validationService;
+    private final ValidationService validationService;
     private final CommandParser parser;
 
-    public ExpressionService(DefaultValidationService validationService, CommandParser commandParser) {
+    public ExpressionService(ValidationService validationService, CommandParser commandParser) {
         this.validationService = validationService;
         this.parser = commandParser;
     }
