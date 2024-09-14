@@ -54,7 +54,7 @@ public class DefaultCommand implements Command {
             var event = result.getValue();
 
             if (result.isFailed() && event == null) {
-                return ActionResult.failed();
+                return ActionResult.failed(result.getMessage());
             }
 
             var failed = result.isFailed();

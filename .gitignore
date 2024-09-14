@@ -4,10 +4,13 @@ target/
 !**/src/test/**/target/
 .idea/
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/misc.xml
+.idea/material_theme_project_new.xml
 *.iws
 *.iml
 *.ipr
@@ -36,3 +39,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/uiDesigner.xml

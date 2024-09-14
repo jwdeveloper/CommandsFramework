@@ -24,7 +24,7 @@ public class CommandProperties {
      * Contains list of Sender types can
      * CAN NOT use this command
      */
-    private List<SenderType> excludedSenders = new ArrayList<>();
+    private List<Class<?>> excludedSenders = new ArrayList<>();
 
     /**
      * Command short description

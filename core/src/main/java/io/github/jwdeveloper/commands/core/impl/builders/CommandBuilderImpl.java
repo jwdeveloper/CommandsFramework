@@ -183,7 +183,6 @@ public class CommandBuilderImpl implements CommandBuilder {
         var commandContainer = container.createChildContainer()
                 .registerSingleton(CommandEventsImpl.class, events)
                 .registerSingleton(CommandServices.class)
-                .registerSingleton(DefaultValidationService.class)
                 .registerSingleton(ExpressionService.class)
                 .registerSingleton(CommandParser.class)
                 .registerSingleton(Command.class, con ->

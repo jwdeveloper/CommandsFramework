@@ -1,7 +1,6 @@
 package io.github.jwdeveloper.commands.api.builders;
 
 import io.github.jwdeveloper.commands.api.data.CommandProperties;
-import io.github.jwdeveloper.commands.api.data.SenderType;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -138,7 +137,7 @@ public interface CommandPropsBuilder<BUILDER> {
      * @param senderTypes one or more sender type
      * @return builder
      */
-    default BUILDER withExcludedSenders(SenderType... senderTypes) {
+    default BUILDER withExcludedSenders(Class<?>... senderTypes) {
         return withProperties(commandProperties ->
         {
             properties().excludedSenders().addAll(Arrays.stream(senderTypes).toList());
